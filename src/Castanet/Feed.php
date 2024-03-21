@@ -1,5 +1,11 @@
 <?php
 
+namespace Castanet\Castanet;
+
+use Castanet\Castanet;
+use DOMDocument;
+use DOMNode;
+
 /**
  * This file contains the feed object for the Castanet package
  *
@@ -51,7 +57,6 @@
  */
 class Feed
 {
-    // {{{ protected properties
 
     /**
      * The title of this feed
@@ -191,14 +196,11 @@ class Feed
      */
     protected $items = array();
 
-    // }}}
-    // {{{ public function __construct()
-
     /**
      * Creates a new feed
      *
-     * @param string $title       the title of the feed.
-     * @param string $link        the web link of the feed.
+     * @param string $title the title of the feed.
+     * @param string $link the web link of the feed.
      * @param string $description the description of the feed.
      */
     public function __construct($title, $link, $description)
@@ -207,9 +209,6 @@ class Feed
         $this->setLink($link);
         $this->setDescription($description);
     }
-
-    // }}}
-    // {{{ public function setTitle()
 
     /**
      * Sets the title of this feed
@@ -223,9 +222,6 @@ class Feed
         $this->title = strval($title);
     }
 
-    // }}}
-    // {{{ public function setLink()
-
     /**
      * Sets the web link of this feed
      *
@@ -238,9 +234,6 @@ class Feed
         $this->link = strval($link);
     }
 
-    // }}}
-    // {{{ public function setDescription()
-
     /**
      * Sets the description of this feed
      *
@@ -252,9 +245,6 @@ class Feed
     {
         $this->description = strval($description);
     }
-
-    // }}}
-    // {{{ public function setLanguage()
 
     /**
      * Sets the language of this feed
@@ -269,9 +259,6 @@ class Feed
         $this->language = strval($language);
     }
 
-    // }}}
-    // {{{ public function setCopyright()
-
     /**
      * Sets the copyright attribution of this feed
      *
@@ -284,9 +271,6 @@ class Feed
         $this->copyright = strval($copyright);
     }
 
-    // }}}
-    // {{{ public function setEditorEmail()
-
     /**
      * Sets the managing editor of this feed
      *
@@ -298,9 +282,6 @@ class Feed
     {
         $this->managing_editor = strval($managing_editor);
     }
-
-    // }}}
-    // {{{ public function setItunesImage()
 
     /**
      * Sets the iTunes cover image of this feed
@@ -316,16 +297,13 @@ class Feed
         $this->itunes_image_url = strval($url);
     }
 
-    // }}}
-    // {{{ public function setImage()
-
     /**
      * Sets the RSS image of this feed
      *
-     * @param string  $url    the RSS image of this feed. This should have
+     * @param string $url the RSS image of this feed. This should have
      *                        maximum dimensions of 144x400 pixels. A square
      *                        aspect ratio iis preferred byt not required.
-     * @param integer $width  the width of the image in pixels.
+     * @param integer $width the width of the image in pixels.
      * @param integer $height the height of the image in pixels.
      *
      * @return null
@@ -336,9 +314,6 @@ class Feed
         $this->image_width = intval($width);
         $this->image_height = intval($height);
     }
-
-    // }}}
-    // {{{ public function setItunesExplicit()
 
     /**
      * Sets whether or not this feed is marked as explicit in iTunes
@@ -352,9 +327,6 @@ class Feed
     {
         $this->itunes_explicit = ($explicit) ? true : false;
     }
-
-    // }}}
-    // {{{ public function setItunesBlock()
 
     /**
      * Sets whether or not this feed is blocked from the public feed list in
@@ -371,9 +343,6 @@ class Feed
         $this->itunes_block = ($itunes_block) ? true : false;
     }
 
-    // }}}
-    // {{{ public function setAtomLink()
-
     /**
      * Sets the self-referential URL for this feed
      *
@@ -386,24 +355,22 @@ class Feed
         $this->atom_link = strval($atom_link);
     }
 
-    // }}}
-    // {{{ public function setItunesCategories()
-
     /**
      * Sets the iTunes category and subcategories for this feed
      *
      * Categories and subcategories must be selected from the list published
      * by Apple at https://help.apple.com/itc/podcasts_connect/?lang=en#/itc9267a2f12
      *
-     * @param string $itunes_category      the itunes category.
-     * @param array  $itunes_subcategories optional. An array of subcategories.
+     * @param string $itunes_category the itunes category.
+     * @param array $itunes_subcategories optional. An array of subcategories.
      *
      * @return void
      */
     public function setItunesCategories(
         $itunes_category,
         array $itunes_subcategories = array()
-    ) {
+    )
+    {
         $this->itunes_category = $itunes_category;
 
         $this->itunes_subcategories = array();
@@ -411,9 +378,6 @@ class Feed
             $this->itunes_subcategories[] = strval($subcategory);
         }
     }
-
-    // }}}
-    // {{{ public function setItunesOwnerEmail()
 
     /**
      * Sets the email address of the owner of this feed
@@ -427,9 +391,6 @@ class Feed
         $this->itunes_email = strval($itunes_email);
     }
 
-    // }}}
-    // {{{ public function setItunesOwner()
-
     /**
      * Sets the owner of this feed
      *
@@ -441,9 +402,6 @@ class Feed
     {
         $this->itunes_owner = strval($itunes_owner);
     }
-
-    // }}}
-    // {{{ public function setItunesAuthor()
 
     /**
      * Sets the author of this feed
@@ -457,9 +415,6 @@ class Feed
         $this->itunes_author = strval($itunes_author);
     }
 
-    // }}}
-    // {{{ public function addItem()
-
     /**
      * Adds an item to this feed
      *
@@ -472,9 +427,6 @@ class Feed
     {
         $this->items[] = $item;
     }
-
-    // }}}
-    // {{{ public function __toString()
 
     /**
      * Renders this feed to a string
@@ -500,9 +452,6 @@ class Feed
 
         return $document->saveXML();
     }
-
-    // }}}
-    // {{{ public function build()
 
     /**
      * Builds this feed
@@ -536,9 +485,6 @@ class Feed
         $this->buildItems($channel);
     }
 
-    // }}}
-    // {{{ protected function buildTitle()
-
     /**
      * Builds the title element of this feed
      *
@@ -557,9 +503,6 @@ class Feed
         $parent->appendChild($node);
     }
 
-    // }}}
-    // {{{ protected function buildLink()
-
     /**
      * Builds the link element of this feed
      *
@@ -577,9 +520,6 @@ class Feed
         $node->appendChild($text);
         $parent->appendChild($node);
     }
-
-    // }}}
-    // {{{ protected function buildManagingEditor()
 
     /**
      * Builds the managing editor element of this feed
@@ -600,9 +540,6 @@ class Feed
             $parent->appendChild($node);
         }
     }
-
-    // }}}
-    // {{{ protected function buildItunesOwner()
 
     /**
      * Builds the owner element of this feed
@@ -645,9 +582,6 @@ class Feed
         }
     }
 
-    // }}}
-    // {{{ protected function buildItunesCategories()
-
     /**
      * Builds the category elements of this feed
      *
@@ -676,9 +610,6 @@ class Feed
         }
     }
 
-    // }}}
-    // {{{ protected function buildItunesAuthor()
-
     /**
      * Builds the author element of this feed
      *
@@ -701,9 +632,6 @@ class Feed
             $parent->appendChild($node);
         }
     }
-
-    // }}}
-    // {{{ protected function buildAtomLink()
 
     /**
      * Builds the Atom link element of this feed
@@ -728,9 +656,6 @@ class Feed
             $parent->appendChild($node);
         }
     }
-
-    // }}}
-    // {{{ protected function buildDescription()
 
     /**
      * Builds the description element of this feed
@@ -763,9 +688,6 @@ class Feed
         $parent->appendChild($node);
     }
 
-    // }}}
-    // {{{ protected function buildLanguage()
-
     /**
      * Builds the language element of this feed
      *
@@ -785,9 +707,6 @@ class Feed
             $parent->appendChild($node);
         }
     }
-
-    // }}}
-    // {{{ protected function buildCopyright()
 
     /**
      * Builds the copyright attribution element of this feed
@@ -809,9 +728,6 @@ class Feed
         }
     }
 
-    // }}}
-    // {{{ protected function buildItunesExplicit()
-
     /**
      * Builds the iTunes explicit element of this feed
      *
@@ -832,9 +748,6 @@ class Feed
         $parent->appendChild($node);
     }
 
-    // }}}
-    // {{{ protected function buildItunesBlock()
-
     /**
      * Builds the iTunes block element of this feed
      *
@@ -854,9 +767,6 @@ class Feed
 
         $parent->appendChild($node);
     }
-
-    // }}}
-    // {{{ protected function buildItunesImage()
 
     /**
      * Builds the iTunes image element of this feed
@@ -881,8 +791,6 @@ class Feed
         }
     }
 
-    // }}}
-    // {{{ protected function buildImage()
 
     /**
      * Builds the image element of this feed
@@ -925,9 +833,6 @@ class Feed
         }
     }
 
-    // }}}
-    // {{{ protected function buildItems()
-
     /**
      * Builds the item elements of this feed
      *
@@ -941,8 +846,5 @@ class Feed
             $item->build($parent);
         }
     }
-
-    // }}}
 }
 
-?>

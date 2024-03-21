@@ -15,3 +15,5 @@ yarn-error.log*
 # dependency lock file
 composer.lock
 yarn.lock
+
+.idea

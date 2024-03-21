@@ -1,5 +1,7 @@
 <?php
 
+namespace Castanet;
+
 /**
  * This file contains package-level constants for the Castanet package
  *
@@ -51,7 +53,6 @@
  */
 abstract class Castanet
 {
-    // {{{ constants
 
     /**
      * Constant for RSS version to use in XML document
@@ -73,5 +74,4 @@ abstract class Castanet
      */
     const ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom';
 
-    // }}}
 }
