@@ -826,7 +826,7 @@ class Castanet_Feed
         $node = $document->createElementNS(
             Castanet::ITUNES_NAMESPACE,
             'explicit',
-            ($this->itunes_explicit) ? 'yes' : 'no'
+            ($this->itunes_explicit) ? 'true' : 'false'
         );
 
         $parent->appendChild($node);
