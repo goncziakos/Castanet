@@ -185,7 +185,7 @@ class Feed
     /**
      * The items of this feed
      *
-     * An array of Castanet_Feed items.
+     * An array of Feed items.
      *
      * @var array
      */
@@ -463,12 +463,12 @@ class Feed
     /**
      * Adds an item to this feed
      *
-     * @param Castanet_Item $item the item to add. It will appear after
+     * @param Item $item the item to add. It will appear after
      *                            existing items.
      *
      * @return null
      */
-    public function addItem(Castanet_Item $item)
+    public function addItem(Item $item)
     {
         $this->items[] = $item;
     }
