@@ -1,6 +1,6 @@
 <?php
 
-namespace Castanet;
+namespace Silverorange\Castanet;
 
 /**
  * This file contains package-level constants for the Castanet package

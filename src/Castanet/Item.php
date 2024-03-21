@@ -1,8 +1,8 @@
 <?php
 
-namespace Castanet\Castanet;
+namespace Silverorange\Castanet\Castanet;
 
-use Castanet\Castanet;
+use Silverorange\Castanet\Castanet;
 use DateTime;
 use DOMNode;
 
